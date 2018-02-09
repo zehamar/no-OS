@@ -68,16 +68,23 @@ typedef enum {
 	PM_1250,
 } refclk_ppm;
 
+typedef enum {
+	XILINX_XCVR_TYPE_S7_GTX2,
+	XILINX_XCVR_TYPE_US_GTH3,
+	XILINX_XCVR_TYPE_US_GTH4,
+} xilinx_xcvr_type;
+
 typedef struct {
-	uint32_t	base_addr;
-	uint8_t		tx_enable;
-	refclk_ppm	ppm;
-	uint16_t	encoding;
-	uint8_t		gth_enable;
-	uint8_t		lpm_enable;
-	uint8_t		cpll_enable;
-	uint32_t	lane_rate_khz;
-	uint32_t	ref_rate_khz;
+	xilinx_xcvr_type	type;
+	uint8_t				num_lanes;
+	uint8_t				tx_enable;
+	uint32_t			base_addr;
+	refclk_ppm			ppm;
+	uint16_t			encoding;
+	uint8_t				lpm_enable;
+	uint8_t				cpll_enable;
+	uint32_t			lane_rate_khz;
+	uint32_t			ref_rate_khz;
 } xcvr_device;
 
 /******************************************************************************/
