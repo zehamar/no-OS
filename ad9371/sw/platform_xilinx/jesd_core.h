@@ -74,6 +74,18 @@ typedef enum {
 	XILINX_XCVR_TYPE_US_GTH4,
 } xilinx_xcvr_type;
 
+struct xcvr_cpll_config {
+	uint32_t refclk_div;
+	uint32_t fb_div_N1;
+	uint32_t fb_div_N2;
+};
+
+struct xcvr_qpll_config {
+	uint32_t refclk_div;
+	uint32_t fb_div;
+	uint32_t band;
+};
+
 typedef struct {
 	xilinx_xcvr_type	type;
 	uint8_t				num_lanes;
