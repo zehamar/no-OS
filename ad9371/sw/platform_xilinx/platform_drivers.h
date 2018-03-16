@@ -53,7 +53,11 @@
 /******************************************************************************/
 /********************** Macros and Constants Definitions **********************/
 /******************************************************************************/
+#ifdef XPS_BOARD_ZCU102
+#define GPIO_OFFSET			78
+#else
 #define GPIO_OFFSET			54
+#endif
 #define DAC_GPIO_PLDDR_BYPASS	GPIO_OFFSET + 60
 #define AD9528_RESET_B      GPIO_OFFSET + 59
 #define AD9528_SYSREF_REQ   GPIO_OFFSET + 58
