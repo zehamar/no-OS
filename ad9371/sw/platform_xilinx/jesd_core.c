@@ -1206,14 +1206,14 @@ int32_t xcvr_setup(mykonosDevice_t *myk_dev)
 	xcvr_configure_lpm_dfe_mode(&rx_xcvr,
 			XCVR_DRP_PORT_CHANNEL_BCAST, rx_xcvr.lpm_enable);
 	xcvr_clk_set_rate(&rx_xcvr,
-			rx_xcvr.ref_rate_khz * 40, rx_xcvr.ref_rate_khz);
+			rx_xcvr.lane_rate_khz, rx_xcvr.ref_rate_khz);
 	xcvr_write(&rx_xcvr, XCVR_REG_RESETN, XCVR_RESETN);
 
 	xcvr_write(&tx_xcvr, XCVR_REG_RESETN, 0);
 	xcvr_write(&tx_xcvr, XCVR_REG_CONTROL,
 			XCVR_SYSCLK_SEL(3) | XCVR_OUTCLK_SEL(3));
 	xcvr_clk_set_rate(&tx_xcvr,
-			tx_xcvr.ref_rate_khz * 40, tx_xcvr.ref_rate_khz);
+			tx_xcvr.lane_rate_khz, tx_xcvr.ref_rate_khz);
 	xcvr_write(&tx_xcvr, XCVR_REG_RESETN, XCVR_RESETN);
 
 	xcvr_write(&rx_os_xcvr, XCVR_REG_RESETN, 0);
@@ -1222,32 +1222,7 @@ int32_t xcvr_setup(mykonosDevice_t *myk_dev)
 	xcvr_configure_lpm_dfe_mode(&rx_os_xcvr,
 			XCVR_DRP_PORT_CHANNEL_BCAST, rx_os_xcvr.lpm_enable);
 	xcvr_clk_set_rate(&rx_os_xcvr,
-			rx_os_xcvr.ref_rate_khz * 40, rx_os_xcvr.ref_rate_khz);
-	xcvr_write(&rx_os_xcvr, XCVR_REG_RESETN, XCVR_RESETN);
-
-	xcvr_write(&rx_xcvr, XCVR_REG_RESETN, 0);
-	xcvr_write(&rx_xcvr, XCVR_REG_CONTROL,
-			XCVR_LPM_DFE_N | XCVR_OUTCLK_SEL(3));
-	xcvr_configure_lpm_dfe_mode(&rx_xcvr,
-			XCVR_DRP_PORT_CHANNEL_BCAST, rx_xcvr.lpm_enable);
-	xcvr_clk_set_rate(&rx_xcvr,
-			myk_dev->rx->rxProfile->iqRate_kHz * 40, rx_xcvr.ref_rate_khz);
-	xcvr_write(&rx_xcvr, XCVR_REG_RESETN, XCVR_RESETN);
-
-	xcvr_write(&tx_xcvr, XCVR_REG_RESETN, 0);
-	xcvr_write(&tx_xcvr, XCVR_REG_CONTROL,
-			XCVR_SYSCLK_SEL(3) | XCVR_OUTCLK_SEL(3));
-	xcvr_clk_set_rate(&tx_xcvr,
-			myk_dev->tx->txProfile->iqRate_kHz * 20, tx_xcvr.ref_rate_khz);
-	xcvr_write(&tx_xcvr, XCVR_REG_RESETN, XCVR_RESETN);
-
-	xcvr_write(&rx_os_xcvr, XCVR_REG_RESETN, 0);
-	xcvr_write(&rx_os_xcvr, XCVR_REG_CONTROL,
-			XCVR_LPM_DFE_N | XCVR_OUTCLK_SEL(3));
-	xcvr_configure_lpm_dfe_mode(&rx_os_xcvr,
-			XCVR_DRP_PORT_CHANNEL_BCAST, rx_os_xcvr.lpm_enable);
-	xcvr_clk_set_rate(&rx_os_xcvr,
-			myk_dev->obsRx->orxProfile->iqRate_kHz * 20, rx_os_xcvr.ref_rate_khz);
+			rx_os_xcvr.lane_rate_khz, rx_os_xcvr.ref_rate_khz);
 	xcvr_write(&rx_os_xcvr, XCVR_REG_RESETN, XCVR_RESETN);
 
 	mdelay(1);
